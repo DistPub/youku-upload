@@ -9,7 +9,8 @@ Upload videos to Youku from the command line
 Before you use this tool, you should create your application at https://cloud.youku.com/app
 
 Youku support these formats: 
-    wmv,avi,dat,asf,rm,rmvb,ram,mpg,mpeg,3gp,mov,mp4,m4v,dvix,dv,dat,mkv,flv,vob,ram,qt,divx,cpk,fli,flc,mod
+    wmv,avi,dat,asf,rm,rmvb,ram,mpg,mpeg,3gp,mov,mp4,m4v,dvix,dv,dat,mkv,flv,vob,ram,qt,
+    divx,cpk,fli,flc,mod
 '''
 
 

@@ -1,6 +1,9 @@
 # youku-upload
 Upload videos to Youku from the command line
 
+# Install
+`pip install youku-upload`
+
 # Usage
 
 `youku-upload --client-id YOUR-CLIENT-ID  --access-token YOUR-ACCESS-TOKEN file-to-upload.mp4`
@@ -8,19 +11,20 @@ Upload videos to Youku from the command line
 More command arguments, please check:
 
 ```
-usage: command.py [-h] --client-id CLIENT_ID --access-token ACCESS_TOKEN
-                  [--title TITLE] [--tags TAGS] [--description DESCRIPTION]
-                  [--copyright-type COPYRIGHT_TYPE]
-                  [--public-type PUBLIC_TYPE] [--category CATEGORY]
-                  [--watch-password WATCH_PASSWORD]
-                  FILE [FILE ...]
+usage: youku-upload [-h] --client-id CLIENT_ID --access-token ACCESS_TOKEN
+                    [--title TITLE] [--tags TAGS] [--description DESCRIPTION]
+                    [--copyright-type COPYRIGHT_TYPE]
+                    [--public-type PUBLIC_TYPE] [--category CATEGORY]
+                    [--watch-password WATCH_PASSWORD]
+                    FILE [FILE ...]
 
 Upload videos to Youku from the command line
 
 Before you use this tool, you should create your application at https://cloud.youku.com/app
 
 Youku support these formats: 
-    wmv,avi,dat,asf,rm,rmvb,ram,mpg,mpeg,3gp,mov,mp4,m4v,dvix,dv,dat,mkv,flv,vob,ram,qt,divx,cpk,fli,flc,mod
+    wmv,avi,dat,asf,rm,rmvb,ram,mpg,mpeg,3gp,mov,mp4,m4v,
+    dvix,dv,dat,mkv,flv,vob,ram,qt,divx,cpk,fli,flc,mod
 
 positional arguments:
   FILE                  file to upload
