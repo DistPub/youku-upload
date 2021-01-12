@@ -286,8 +286,13 @@ class YoukuUpload(object):
         # create Bucket object
         bucket = oss2.Bucket(oss2.StsAuth(self.temp_access_id, self.temp_access_secret, self.security_token),
                              self.endpoint, self.oss_bucket)
-        #  start upload
-        result = oss2.resumable_upload(bucket, self.oss_object, self.file, multipart_threshold=100 * 1024)
+        #  start upload slice by 100 KB
+        slice_size = 100 * 1024
+        oss2.defaults.connection_pool_size = 2 * os.cpu_count()
+        result = oss2.resumable_upload(bucket, self.oss_object, self.file,
+                                       multipart_threshold=slice_size,
+                                       part_size=slice_size,
+                                       num_threads=oss2.defaults.connection_pool_size)
         self.logger.info("Upload success, add result: {0}".format(result))
         if result.status == 200:
             self.commit()
