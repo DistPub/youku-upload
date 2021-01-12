@@ -262,7 +262,7 @@ class YoukuUpload(object):
         check_error(r, 200)
         return r.json()
 
-    def upload(self, **params):
+    def upload(self, callback=None, **params):
         """start uploading the file until upload is complete or error.
            This is the main method to used, If you do not care about
            state of process.
@@ -271,6 +271,7 @@ class YoukuUpload(object):
                 params: a dict object describe video info, eg title,
                 tags, description, category.
                 all video params see the doc of prepare_video_params.
+                callback: func(completed, total) to call
 
            Returns:
                 return video_id if upload successfully
@@ -292,7 +293,8 @@ class YoukuUpload(object):
         result = oss2.resumable_upload(bucket, self.oss_object, self.file,
                                        multipart_threshold=slice_size,
                                        part_size=slice_size,
-                                       num_threads=oss2.defaults.connection_pool_size)
+                                       num_threads=oss2.defaults.connection_pool_size,
+                                       progress_callback=callback)
         self.logger.info("Upload success, add result: {0}".format(result))
         if result.status == 200:
-            self.commit()
+            return self.commit()

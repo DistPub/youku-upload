@@ -1,4 +1,5 @@
 import argparse
+import progressbar
 
 from youku import YoukuUpload
 
@@ -73,9 +74,39 @@ Others => 其他
     options = parse.parse_args(namespace=DictNameSpace())
     ignore_keys = ['file', 'client_id', 'access_token']
     dict_options = {k: v for k, v in options.items() if v is not None and k not in ignore_keys}
+    bar = progressbar.ProgressBar(widgets=[
+        progressbar.Percentage(),
+        ' ', progressbar.Bar(),
+        ' ', progressbar.FileTransferSpeed(),
+        ' ', progressbar.DataSize(), '/', progressbar.DataSize('max_value'),
+        ' ', progressbar.Timer(),
+        ' ', progressbar.AdaptiveETA(),
+    ])
+
+    def callback(completed, total_size):
+        if not hasattr(bar, "next_update"):
+            if hasattr(bar, "maxval"):
+                bar.maxval = total_size
+            else:
+                bar.max_value = total_size
+            bar.start()
+        bar.update(completed)
+
+    def finish():
+        if hasattr(bar, "next_update"):
+            return bar.finish()
 
     for file in options.file:
-        YoukuUpload(options.client_id, options.access_token, file).upload(**dict_options)
+        video_id = None
+
+        try:
+            print(f'start upload file: {file}...')
+            video_id = YoukuUpload(options.client_id, options.access_token,
+                                   file).upload(callback=callback, **dict_options)
+        finally:
+            finish()
+
+        print(f'\nfinish upload, please check: https://v.youku.com/v_show/id_{video_id}.html')
 
 
 if __name__ == '__main__':
