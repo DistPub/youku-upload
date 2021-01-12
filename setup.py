@@ -3,7 +3,7 @@ import os
 import re
 import sys
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3, 6)
@@ -44,7 +44,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Smite Chow',
     author_email='xiaopengyou2no1@gmail.com',
-    packages=['youku_upload/'],
+    packages=find_packages(),
     include_package_data=True,
     install_requires=['oss2', 'requests', 'progressbar2'],
     python_requires=">=3.6",
