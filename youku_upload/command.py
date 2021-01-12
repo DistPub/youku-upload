@@ -1,7 +1,7 @@
 import argparse
 import progressbar
 
-from youku import YoukuUpload
+from youku_upload import YoukuUpload
 
 description = '''
 Upload videos to Youku from the command line
