@@ -84,13 +84,13 @@ Others => 其他
         ' ', progressbar.AdaptiveETA(),
     ])
 
-    def callback(completed, total_size):
+    def reset():
+        if hasattr(bar, "next_update"):
+            delattr(bar, "next_update")
+
+    def update(completed, total_size):
         if not hasattr(bar, "next_update"):
-            if hasattr(bar, "maxval"):
-                bar.maxval = total_size
-            else:
-                bar.max_value = total_size
-            bar.start()
+            bar.start(total_size)
         bar.update(completed)
 
     def finish():
@@ -99,11 +99,12 @@ Others => 其他
 
     for file in options.file:
         video_id = None
+        reset()
 
         try:
             print(f'start upload file: {file}...')
             video_id = YoukuUpload(options.client_id, options.access_token,
-                                   file).upload(callback=callback, **dict_options)
+                                   file).upload(callback=update, **dict_options)
         finally:
             finish()
 
