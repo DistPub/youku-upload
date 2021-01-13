@@ -1,7 +1,7 @@
 import argparse
 import progressbar
 
-from youku_upload import YoukuUpload
+from youku_upload import YoukuUpload, VERSION
 
 description = '''
 Upload videos to Youku from the command line
@@ -34,6 +34,7 @@ class DictNameSpace(dict):
 def main():
     parse = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, description=description)
     parse.add_argument('file', metavar='FILE', nargs='+', help='file to upload')
+    parse.add_argument('--version', action='version', version=f'%(prog)s v{VERSION}')
     parse.add_argument('--client-id', required=True, help='application client id')
     parse.add_argument('--access-token', required=True, help='access token')
     parse.add_argument('--title', required=False, help='2-50 characters, default is file name')
