@@ -1,0 +1,59 @@
+[project]
+name = "youku-upload"
+version = "0.1.2"
+description = "Upload videos to Youku from the command line"
+authors = [
+    {name = "Smite Chow",email = "xiaopengyou2no1@gmail.com"}
+]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.6"
+dependencies = [
+    "aliyun-python-sdk-core (==2.16.0)",
+    "aliyun-python-sdk-core-v3 (==2.13.33)",
+    "aliyun-python-sdk-kms (==2.16.5)",
+    "certifi (==2026.5.20)",
+    "cffi (==2.0.0)",
+    "chardet (==4.0.0)",
+    "crcmod (==1.7)",
+    "cryptography (==48.0.0)",
+    "idna (==2.10)",
+    "jmespath (==0.10.0)",
+    "oss2 (==2.13.1)",
+    "packaging (==26.2)",
+    "progressbar2 (==3.53.1)",
+    "pycparser (==3.0)",
+    "pycryptodome (==3.23.0)",
+    "python-utils (==3.9.1)",
+    "requests (==2.25.1)",
+    "six (==1.17.0)",
+    "typing-extensions (==4.15.0)",
+    "urllib3 (==1.26.20)"
+]
+
+classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: Console',
+        'Intended Audience :: End Users/Desktop',
+        'License :: OSI Approved :: MIT License',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3 :: Only',
+        'Topic :: Internet :: WWW/HTTP'
+]
+
+[tool.poetry.scripts]
+youku-upload = "youku_upload.command:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+priority = "primary"
+
